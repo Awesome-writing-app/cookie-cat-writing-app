@@ -24,7 +24,7 @@
     components: { InspirationalQuote },
     data() {
       return {
-        text: 'hi',
+        text: '',
         name: 'landing-page',
         methods: {
           open(link) {
@@ -35,7 +35,9 @@
     },
     computed: {
       wordcount() {
-        return this.text.match(/\S+/g).length;
+        const match = this.text.match(/\S+/g);
+        if (match) return match.length;
+        return 0;
       },
     },
   };
