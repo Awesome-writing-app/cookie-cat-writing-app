@@ -69,14 +69,14 @@
     height: 50vh;
     width: 90vw;
     padding: 10px;
+    resize: none;
+    overflow: scroll;
   }
 
   #logo {
     height: auto;
     margin-bottom: 10px;
     width: 150px;
-    resize: none;
-    overflow: scroll;
   }
 
   main {
