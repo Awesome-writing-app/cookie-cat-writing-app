@@ -47,12 +47,17 @@ app.on('activate', () => {
 
 ipcMain.on('save-file-dialog', (event, text) => {
   dialog.showSaveDialog(mainWindow, { multiSelections: false }, (filepath) => {
-    console.log(filepath);
-    fs.writeFile(filepath, text, 'utf8', () => {
-      console.log('It is saved');
+    fs.writeFile(filepath, text, 'utf8');
+  });
+});
+
+ipcMain.on('open-file-dialog', (event) => {
+  dialog.showOpenDialog(mainWindow, { multiSelections: false }, (filepath) => {
+    filepath = filepath[0];
+    fs.readFile(filepath, 'utf8', (err, text) => {
+      event.sender.send('here-is-text-to-open', text);
     });
   });
-  // event.sender.send('asynchronous-reply', 'pong')
 });
 
 /**

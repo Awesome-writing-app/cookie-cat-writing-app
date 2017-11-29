@@ -7,6 +7,7 @@
           Cookie Cat Writing App!
         </span>
         <button v-on:click="saveDialog()">Save</button>
+        <button v-on:click="openDialog()">Open</button>
         <textarea v-model="text" id="main-textarea" placeholder="Start typing">
         </textarea>
       <p>wordcount: {{wordcount}}</p>
@@ -20,6 +21,10 @@
   // import InspirationalQuote from './LandingPage/InspirationalQuote';
   const { ipcRenderer } = require('electron');
 
+  ipcRenderer.on('here-is-text-to-open', (event, arg) => {
+    this.text = arg;
+  });
+
   export default {
     components: { },
     data() {
@@ -28,6 +33,9 @@
         name: 'landing-page',
         saveDialog() {
           ipcRenderer.send('save-file-dialog', this.text);
+        },
+        openDialog() {
+          ipcRenderer.send('open-file-dialog');
         },
       };
     },
