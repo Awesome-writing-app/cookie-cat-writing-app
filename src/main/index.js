@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
+import { app, BrowserWindow, ipcMain, dialog } from 'electron'; // eslint-disable-line
+import fs from 'fs';
 
 /**
  * Set `__static` path to static files in production
@@ -42,6 +43,16 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+ipcMain.on('save-file-dialog', (event, text) => {
+  dialog.showSaveDialog(mainWindow, { multiSelections: false }, (filepath) => {
+    console.log(filepath);
+    fs.writeFile(filepath, text, 'utf8', () => {
+      console.log('It is saved');
+    });
+  });
+  // event.sender.send('asynchronous-reply', 'pong')
 });
 
 /**

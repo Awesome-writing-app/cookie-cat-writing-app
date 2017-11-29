@@ -2,34 +2,32 @@
   <div id="wrapper">
     <main>
       <div class="main-col">
-        <img id="logo" src="~@/assets/cookiecat.png" alt="cookie-cat">
         <span class="title">
+          <img id="logo" src="~@/assets/cookiecat.png" alt="cookie-cat">
           Cookie Cat Writing App!
         </span>
-        <inspirational-quote></inspirational-quote>
-        <textarea v-model="text" id="main-textarea" placeholder="Start typing"></textarea>
+        <button v-on:click="saveDialog()">Save</button>
+        <textarea v-model="text" id="main-textarea" placeholder="Start typing">
+        </textarea>
       <p>wordcount: {{wordcount}}</p>
-      <p>text: {{text}} </p>
       </div>
-
     </main>
   </div>
 </template>
 
 <script>
   // import SystemInformation from './LandingPage/SystemInformation';
-  import InspirationalQuote from './LandingPage/InspirationalQuote';
+  // import InspirationalQuote from './LandingPage/InspirationalQuote';
+  const { ipcRenderer } = require('electron');
 
   export default {
-    components: { InspirationalQuote },
+    components: { },
     data() {
       return {
         text: '',
         name: 'landing-page',
-        methods: {
-          open(link) {
-            this.$electron.shell.openExternal(link);
-          },
+        saveDialog() {
+          ipcRenderer.send('save-file-dialog', this.text);
         },
       };
     },
@@ -39,6 +37,7 @@
         if (match) return match.length;
         return 0;
       },
+
     },
   };
 
@@ -66,7 +65,7 @@
   }
 
   #main-textarea {
-    height: 50vh;
+    height: 75vh;
     width: 90vw;
     padding: 10px;
     resize: none;
@@ -75,8 +74,8 @@
 
   #logo {
     height: auto;
-    margin-bottom: 10px;
-    width: 150px;
+    margin-bottom: 0px;
+    width: 30px;
   }
 
   main {
@@ -94,17 +93,12 @@
     width: 100%;
   }
 
-  .welcome {
-    color: #555;
-    font-size: 23px;
-    margin-bottom: 10px;
-  }
 
   .title {
     color: #2c3e50;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
-    margin-bottom: 6px;
+    margin-bottom: 3px;
   }
 
   .title.alt {
