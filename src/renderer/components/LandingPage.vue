@@ -1,18 +1,24 @@
 <template>
   <div id="wrapper">
+    <div id="header">
+      <span class="title">
+        <img id="logo" src="~@/assets/cookiecat.png" alt="cookie-cat">
+        Cookie Cat Writing App!
+      </span><br />
+      <button v-on:click="saveDialog()">Save</button>
+      <button v-on:click="openDialog()">Open</button>
+    </div>
     <main>
-      <div class="main-col">
-        <span class="title">
-          <img id="logo" src="~@/assets/cookiecat.png" alt="cookie-cat">
-          Cookie Cat Writing App!
-        </span>
-        <button v-on:click="saveDialog()">Save</button>
-        <button v-on:click="openDialog()">Open</button>
+      <div class="main col">
         <textarea v-model="text" id="main-textarea" placeholder="Start typing">
         </textarea>
-      <p>wordcount: {{wordcount}}</p>
+      </div>
+      <div v-html="markdownHTML" class="preview col">
       </div>
     </main>
+    <div id="footer">
+      <p>wordcount: {{wordcount}}</p>
+    </div>
   </div>
 </template>
 
@@ -20,6 +26,7 @@
   // import SystemInformation from './LandingPage/SystemInformation';
   // import InspirationalQuote from './LandingPage/InspirationalQuote';
   const { ipcRenderer } = require('electron');
+  const marked = require('marked');
 
   ipcRenderer.on('here-is-text-to-open', (event, arg) => {
     this.text = arg;
@@ -45,7 +52,9 @@
         if (match) return match.length;
         return 0;
       },
-
+      markdownHTML() {
+        return marked(this.text);
+      },
     },
   };
 
@@ -64,17 +73,36 @@
     font-family: 'Source Sans Pro', sans-serif;
   }
 
+  .preview {
+    background-color: white;
+    width: 50%;
+  }
+
   #wrapper {
     background:
       linear-gradient(45deg,#ffedee,#ffefdd);
     height: 100vh;
     padding: 60px 80px;
     width: 100vw;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   #main-textarea {
     height: 75vh;
-    width: 90vw;
+    width: 90%;
     padding: 10px;
     resize: none;
     overflow: scroll;
@@ -93,12 +121,13 @@
   main > div {
     justify-content: center;
     align-items: center;
+    width: 50%
   }
 
-  .main-col {
+  .main > col {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 50%;
   }
 
 
