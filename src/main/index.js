@@ -55,6 +55,7 @@ ipcMain.on('open-file-dialog', (event) => {
   dialog.showOpenDialog(mainWindow, { multiSelections: false }, (filepath) => {
     filepath = filepath[0];
     fs.readFile(filepath, 'utf8', (err, text) => {
+      if (err) throw err;
       event.sender.send('here-is-text-to-open', text);
     });
   });
