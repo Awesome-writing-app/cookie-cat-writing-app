@@ -76,13 +76,20 @@
     background:
       linear-gradient(45deg,#ffedee,#ffefdd);
     height: 100vh;
-    padding: 60px 80px;
+    padding: 7px 7px;
     width: 100vw;
     justify-content: center;
     align-items: center;
   }
 
+  main {
+    display: flex;
+    height: 85vh;
+    width: 100%;
+  }
+
   #header {
+    height: 10vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,7 +102,6 @@
   }
 
   #main-textarea {
-    height: 75vh;
     width: 100%;
     padding: 10px;
     resize: none;
@@ -106,6 +112,7 @@
   #main-textarea, #markdown-preview {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1em;
+    height: 80vh;
   }
 
   #main-textarea:focus {
@@ -118,9 +125,7 @@
     width: 30px;
   }
 
-  main {
-    display: flex;
-  }
+
 
   main > div {
     justify-content: center;
@@ -140,29 +145,5 @@
   .title.alt {
     font-size: 18px;
     margin-bottom: 10px;
-  }
-
-  .doc p {
-    color: black;
-    margin-bottom: 10px;
-  }
-
-  .doc button {
-    font-size: .8em;
-    cursor: pointer;
-    outline: none;
-    padding: 0.75em 2em;
-    border-radius: 2em;
-    display: inline-block;
-    color: #fff;
-    background-color: #4fc08d;
-    transition: all 0.15s ease;
-    box-sizing: border-box;
-    border: 1px solid #4fc08d;
-  }
-
-  .doc button.alt {
-    color: #42b983;
-    background-color: transparent;
   }
 </style>
