@@ -28,10 +28,6 @@
   const { ipcRenderer } = require('electron');
   const marked = require('marked');
 
-  ipcRenderer.on('here-is-text-to-open', (event, arg) => {
-    this.text = arg;
-  });
-
   export default {
     components: { },
     data() {
@@ -43,7 +39,11 @@
         },
         openDialog() {
           ipcRenderer.send('open-file-dialog');
+          ipcRenderer.on('here-is-text-to-open', (event, arg) => {
+            this.text = arg;
+          });
         },
+
       };
     },
     computed: {
