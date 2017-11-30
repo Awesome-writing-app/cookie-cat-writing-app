@@ -10,11 +10,10 @@
     </div>
     <main>
       <div class="main col">
-        <textarea v-model="text" id="main-textarea" placeholder="Start typing">
+        <textarea v-model="text" id="main-textarea" placeholder="Start typing" v-on:scroll="(event) => setScroll(event)">
         </textarea>
       </div>
-      <div v-html="markdownHTML" class="preview col">
-      </div>
+      <markdown-preview v-bind:text="text" v-bind:scroll="scroll"></markdown-preview>
     </main>
     <div id="footer">
       <p>wordcount: {{wordcount}}</p>
@@ -23,16 +22,15 @@
 </template>
 
 <script>
-  // import SystemInformation from './LandingPage/SystemInformation';
-  // import InspirationalQuote from './LandingPage/InspirationalQuote';
+  import MarkdownPreview from './LandingPage/MarkdownPreview';
   const { ipcRenderer } = require('electron');
-  const marked = require('marked');
 
   export default {
-    components: { },
+    components: { MarkdownPreview },
     data() {
       return {
         text: '',
+        scroll: 0,
         name: 'landing-page',
         saveDialog() {
           ipcRenderer.send('save-file-dialog', this.text);
@@ -43,7 +41,6 @@
             this.text = arg;
           });
         },
-
       };
     },
     computed: {
@@ -52,8 +49,10 @@
         if (match) return match.length;
         return 0;
       },
-      markdownHTML() {
-        return marked(this.text);
+    },
+    methods: {
+      setScroll(event) {
+        this.scroll = event.target.scrollTop / event.target.scrollHeight;
       },
     },
   };
@@ -71,11 +70,6 @@
 
   body {
     font-family: 'Source Sans Pro', sans-serif;
-  }
-
-  .preview {
-    background-color: white;
-    width: 50%;
   }
 
   #wrapper {
