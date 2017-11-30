@@ -102,6 +102,10 @@
     overflow: scroll;
   }
 
+  #main-textarea:focus {
+    outline: 0px;
+  }
+
   #logo {
     height: auto;
     margin-bottom: 0px;
