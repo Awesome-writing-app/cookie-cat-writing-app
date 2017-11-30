@@ -1,6 +1,12 @@
 # cookie-cat
 
-> An electron-vue project
+A simple markdown editor with a cute theme
+
+## Screenshot
+
+![screenshot](/docs/cookie-cat-screenshot.png)
+
+
 
 #### Build Setup
 
