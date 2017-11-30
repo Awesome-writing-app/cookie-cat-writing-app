@@ -96,10 +96,16 @@
 
   #main-textarea {
     height: 75vh;
-    width: 90%;
+    width: 100%;
     padding: 10px;
     resize: none;
     overflow: scroll;
+    border: 0px;
+    margin: 5px;
+  }
+  #main-textarea, #markdown-preview {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
   }
 
   #main-textarea:focus {
@@ -119,15 +125,10 @@
   main > div {
     justify-content: center;
     align-items: center;
-    width: 50%
-  }
-
-  .main > col {
-    display: flex;
-    flex-direction: column;
     width: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
   }
-
 
   .title {
     color: #2c3e50;

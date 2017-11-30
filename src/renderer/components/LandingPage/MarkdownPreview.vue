@@ -1,5 +1,5 @@
 <template>
-  <div ref="markdownbox" v-html="markdownHTML" class="preview col">
+  <div id="markdown-preview" ref="markdownbox" v-html="markdownHTML" class="preview col">
   </div>
 </template>
 
@@ -14,7 +14,7 @@
     ],
     computed: {
       markdownHTML() {
-        return marked(this.text);
+        return marked(this.text) || '<p style="color:lightgray">Preview</p>';
       },
     },
     data() {
@@ -38,6 +38,7 @@
     padding: 2%;
     overflow: scroll;
     height: 75vh;
+    margin: 5px;
   }
   .preview > p {
     padding-bottom: 10px;
