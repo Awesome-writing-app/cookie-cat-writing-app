@@ -24,9 +24,7 @@
     },
     updated() {
       const divToScroll = this.$refs.markdownbox;
-      console.log(divToScroll);
       divToScroll.scrollTop = this.scroll * divToScroll.scrollHeight;
-      console.log(this.scroll);
     },
   };
 </script>
@@ -38,7 +36,7 @@
     padding: 2%;
     overflow: scroll;
     height: 75vh;
-    margin: 5px;
+    margin-left: 5px;
   }
   .preview > p {
     padding-bottom: 10px;

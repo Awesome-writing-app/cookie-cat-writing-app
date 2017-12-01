@@ -107,7 +107,7 @@
     resize: none;
     overflow: scroll;
     border: 0px;
-    margin: 5px;
+    margin-right: 5px;
   }
   #main-textarea, #markdown-preview {
     font-family: Arial, Helvetica, sans-serif;
