@@ -5,16 +5,11 @@
 
 
 <script>
-  const marked = require('marked');
   export default {
     components: { },
-    props: [
-      'text',
-      'scroll',
-    ],
     computed: {
       markdownHTML() {
-        return marked(this.text) || '<p style="color:lightgray">Preview</p>';
+        return this.$store.getters.markdownText || '<p style="color:lightgray">Preview</p>';
       },
     },
     data() {
@@ -24,7 +19,7 @@
     },
     updated() {
       const divToScroll = this.$refs.markdownbox;
-      divToScroll.scrollTop = this.scroll * divToScroll.scrollHeight;
+      divToScroll.scrollTop = this.$store.state.Scroll.value * divToScroll.scrollHeight;
     },
   };
 </script>
