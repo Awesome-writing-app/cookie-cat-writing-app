@@ -6,6 +6,7 @@
         Cookie Cat Writing App!
       </span><br />
       <button v-on:click="saveDialog()">Save</button>
+      <button v-on:click="exportDialog()">Export</button>
       <button v-on:click="openDialog()">Open</button>
     </div>
     <main>
@@ -34,6 +35,9 @@
         name: 'landing-page',
         saveDialog() {
           ipcRenderer.send('save-file-dialog', this.text);
+        },
+        exportDialog() {
+          this.$emit('export-file-dialog', this.text);
         },
         openDialog() {
           ipcRenderer.send('open-file-dialog');
