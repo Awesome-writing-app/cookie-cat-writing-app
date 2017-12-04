@@ -11,7 +11,7 @@
     </div>
     <main>
       <div class="main col">
-        <textarea v-model="text" id="main-textarea" placeholder="Start typing" v-on:scroll="(event) => setScroll(event)">
+        <textarea v-model="text" id="main-textarea" placeholder="Start typing" v-on:scroll="setScroll">
         </textarea>
       </div>
       <markdown-preview v-bind:scroll="scroll"></markdown-preview>
@@ -56,7 +56,8 @@
     },
     methods: {
       setScroll(event) {
-        this.$store.state.scroll = event.target.scrollTop / event.target.scrollHeight;
+        const localScroll = event.target.scrollTop / event.target.scrollHeight;
+        this.scroll = localScroll;
       },
       saveDialog() {
         ipcRenderer.send('save-file-dialog', this.text);
