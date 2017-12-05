@@ -45,6 +45,11 @@
           this.$store.commit('UPDATE_TEXT', newText);
         },
       },
+      markdownText: {
+        get() {
+          return this.$store.getters.markdownText;
+        },
+      },
       scroll: {
         get() {
           return this.$store.state.Scroll.value;
@@ -63,12 +68,13 @@
         ipcRenderer.send('save-file-dialog', this.text);
       },
       exportDialog() {
-        this.$emit('export-file-dialog', this.text);
+        console.log(this.markdownText);
+        ipcRenderer.send('save-file-dialog', this.markdownText);
       },
       openDialog() {
         ipcRenderer.send('open-file-dialog');
         ipcRenderer.on('here-is-text-to-open', (event, arg) => {
-          this.text = arg;
+          this.$store.commit('UPDATE_TEXT', arg);
         });
       },
     },
